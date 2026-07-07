@@ -73,11 +73,8 @@
         .form-input { margin-bottom:15px; width:100%; padding:12px; border:1px solid #ddd; font-family: inherit; font-size: 0.9rem; }
 
         .nb-section { display: none; margin-bottom: 15px; background: #f6fbf6; padding: 15px; border-left: 2px solid var(--vert-prestige); }
-        .nb-title { margin: 0 0 10px 0; font-size: 0.9rem; color: var(--text-gray); text-align: center; }
-        .nb-row { display: flex; gap: 15px; }
-        .nb-row > div { flex: 1; }
         .nb-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--vert-fonce); margin-bottom: 6px; font-weight: 700; text-align: center; }
-        .nb-input { width: 100%; padding: 10px; border: 1px solid var(--line-color); background: white; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; text-align: center; border-radius: 4px; outline: none; }
+        .nb-input { width: 100%; max-width: 160px; margin: 0 auto; display: block; padding: 10px; border: 1px solid var(--line-color); background: white; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; text-align: center; border-radius: 4px; outline: none; }
         .nb-input:focus { border-color: var(--vert-fonce); }
 
         .message-box { background: var(--white-cream); border: 1px solid var(--line-color); padding: 15px; margin-bottom: 15px; position: relative; }
@@ -224,17 +221,8 @@
                 </select>
 
                 <div id="sec_m" class="nb-section">
-                    <p class="nb-title">Nombre de personnes :</p>
-                    <div class="nb-row">
-                        <div>
-                            <label class="nb-label" for="adultes_m">Adultes</label>
-                            <input type="number" inputmode="numeric" id="adultes_m" name="adultes_m" class="nb-input" value="1" min="1">
-                        </div>
-                        <div>
-                            <label class="nb-label" for="enfants_m">Enfants</label>
-                            <input type="number" inputmode="numeric" id="enfants_m" name="enfants_m" class="nb-input" value="0" min="0">
-                        </div>
-                    </div>
+                    <label class="nb-label" for="adultes_m">Nombre de personnes</label>
+                    <input type="number" inputmode="numeric" id="adultes_m" name="adultes_m" class="nb-input" value="1" min="1">
                 </div>
 
                 <select name="pres_h" id="pres_h" onchange="toggleH()" required class="form-input">
@@ -244,17 +232,8 @@
                 </select>
 
                 <div id="sec_h" class="nb-section">
-                    <p class="nb-title">Nombre de personnes :</p>
-                    <div class="nb-row">
-                        <div>
-                            <label class="nb-label" for="adultes_h">Adultes</label>
-                            <input type="number" inputmode="numeric" id="adultes_h" name="adultes_h" class="nb-input" value="1" min="1">
-                        </div>
-                        <div>
-                            <label class="nb-label" for="enfants_h">Enfants</label>
-                            <input type="number" inputmode="numeric" id="enfants_h" name="enfants_h" class="nb-input" value="0" min="0">
-                        </div>
-                    </div>
+                    <label class="nb-label" for="adultes_h">Nombre de personnes</label>
+                    <input type="number" inputmode="numeric" id="adultes_h" name="adultes_h" class="nb-input" value="1" min="1">
                 </div>
 
                 <div class="message-box">
@@ -326,10 +305,10 @@
             nom:       (formData.get('nom') || '').trim(),
             pres_m:    pres_m === 'oui' ? 'Présent' : 'Absent',
             adultes_m: pres_m === 'oui' ? readCount('adultes_m', 1, 1) : 0,
-            enfants_m: pres_m === 'oui' ? readCount('enfants_m', 0, 0) : 0,
+            enfants_m: 0, // champ supprimé du formulaire — on envoie 0 pour ne pas casser le Apps Script / la feuille
             pres_h:    pres_h === 'oui' ? 'Présent' : 'Absent',
             adultes_h: pres_h === 'oui' ? readCount('adultes_h', 1, 1) : 0,
-            enfants_h: pres_h === 'oui' ? readCount('enfants_h', 0, 0) : 0,
+            enfants_h: 0, // idem
             message:   (formData.get('message') || '').trim()
         };
 

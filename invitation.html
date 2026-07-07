@@ -84,12 +84,22 @@
         .rsvp-deadline { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--vert-fonce); font-style: italic; text-align: center; display: block; margin-bottom: 15px; font-weight: 600; }
 
         .music-control {
-            position: fixed; bottom: 25px; right: 25px; z-index: 2000;
-            background: rgba(255, 255, 255, 0.9); border: 1.5px solid var(--vert-prestige);
-            border-radius: 30px; padding: 10px 18px; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 8px 25px rgba(156, 203, 156, 0.3); cursor: pointer; backdrop-filter: blur(8px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 2000;
+    background: rgba(255, 255, 255, 0.95); /* un peu plus opaque, le blur devient inutile */
+    border: 1.5px solid var(--vert-prestige);
+    border-radius: 30px;
+    padding: 10px 18px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 8px 25px rgba(156, 203, 156, 0.3);
+    cursor: pointer;
+    /* backdrop-filter supprimé : cause du lag/glissement du fixed sur iOS */
+    transform: translateZ(0);            /* force une couche GPU dédiée */
+    -webkit-transform: translateZ(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
         .music-bars { display: flex; align-items: flex-end; gap: 2px; height: 15px; }
         .bar { width: 3px; background: var(--vert-fonce); height: 3px; border-radius: 2px; transition: height 0.3s ease; }
         .playing .bar { animation: bounce 1s ease-in-out infinite alternate; }
@@ -143,7 +153,7 @@
             <span class="sub-text">Se diront « oui »</span>
             <div class="date-block">
                 <span class="date-line">Dimanche 11 Octobre 2026</span><br>
-                <span>à 14h00</span>
+                <span>à 13h00</span>
             </div>
             <div class="info-block">
                 <span class="venue-name">Mairie de Sarcelles Village</span>
